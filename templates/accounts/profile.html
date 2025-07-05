@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Профиль - UzbCode{% endblock %}
+{% block content %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+<div style="margin-top:40px;" class="profile-container">
+    <div class="profile-card">
+        <div class="profile-avatar">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="{{ user.username }}">
+            {% else %}
+                <div class="profile-avatar-placeholder">{{ user.username|slice:":1"|upper }}</div>
+            {% endif %}
+        </div>
+        <div class="profile-info">
+            <h2 class="profile-username">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="profile-email">{{ user.email }}</p>
+            {% if user.bio %}
+                <p class="profile-bio">{{ user.bio }}</p>
+            {% endif %}
+            <div class="profile-links">
+                {% if user.github %}
+                    <a href="{{ user.github }}" target="_blank" class="profile-link">GitHub</a>
+                {% endif %}
+                {% if user.website %}
+                    <a href="{{ user.website }}" target="_blank" class="profile-link">Website</a>
+                {% endif %}
+            </div>
+            <a href="{% url 'edit_profile' %}" class="profile-edit-btn">Редактировать профиль</a>
+        </div>
+    </div>
+    <div class="profile-articles">
+        <h3>Ваши последние статьи</h3>
+        {% if user_articles %}
+            <ul class="profile-article-list">
+                {% for article in user_articles %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}" class="profile-article-link">{{ article.title }}</a>
+                        <span class="profile-article-date">{{ article.created_at|date:"d M Y" }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>У вас пока нет опубликованных статей.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

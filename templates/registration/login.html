@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="auth-page-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2 class="auth-title">Welcome!</h2>
+        </div>
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label" for="id_username">Login</label>
+                <input type="text" class="form-input" id="id_username" name="username" placeholder="loginingizni kiriting" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="id_password">Password</label>
+                <div class="password-input">
+                    <input type="password" class="form-input" id="id_password" name="password" placeholder="Parolingizni kiriting" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword(this)">👁️</button>
+                </div>
+            </div>
+                {% if form.errors %}
+                    <div class="form-errors">
+                        <div class="error-message">
+                            <p>Ma'lumotlarni to'g'ri kiriting:</p>
+                            {{ form.errors }}
+                        </div>
+                    </div>
+                {% endif %}
+            <div class="form-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="remember_me">
+                    <span class="checkbox-custom"></span>
+                    Remember me
+                </label>
+                <a href="{% url 'password_reset' %}" class="forgot-link">Parolni unutmadingiz?</a>
+            </div>
+            <button type="submit" class="form-submit">
+                <span class="submit-text">Login</span>
+                <span class="submit-loader" style="display: none;">⏳</span>
+            </button>
+            <p class="form-switch">
+                Yaratmadingiz? <a href="{% url 'register' %}">Yaratish</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

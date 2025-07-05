@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Darslar{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/_darslar.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="courses-section">
+    <h1>Darslar</h1>
+    <div class="course-grid">
+        <div class="course-card">
+            <div class="course-content">
+                <h3 class="course-title">Dars 1: Python Asoslar</h3>
+                <p class="course-description">Python dasturlash tili asoslari va o'rganish uchun muhim ma'lumotlar</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 12 soat</span>
+                    <span><i class="fas fa-users"></i> 500+ o'quvchi</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <a href="#" class="btn-course">Batafsil</a>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-content">
+                <h3 class="course-title">Dars 2: Django Framework</h3>
+                <p class="course-description">Django framework asoslari va web-saytlar yaratish</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 15 soat</span>
+                    <span><i class="fas fa-users"></i> 300+ o'quvchi</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 45%"></div>
+                </div>
+                <a href="#" class="btn-course">Batafsil</a>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-content">
+                <h3 class="course-title">Dars 3: Frontend Dasturlash</h3>
+                <p class="course-description">HTML, CSS va JavaScript asoslari</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 10 soat</span>
+                    <span><i class="fas fa-users"></i> 450+ o'quvchi</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 60%"></div>
+                </div>
+                <a href="#" class="btn-course">Batafsil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

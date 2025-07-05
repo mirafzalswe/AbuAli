@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Innovating the Digital World</h1>
+        <p class="hero-subtitle">Empowering businesses with cutting-edge technology solutions</p>
+    </div>
+</section>
+
+<section class="about-section section">
+    <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <p class="lead">We are a forward-thinking software company dedicated to transforming the digital landscape. Our mission is to make the world a better place through innovative technology solutions.</p>
+                <p>With expertise in web development, mobile applications, and custom software solutions, we deliver exceptional digital experiences that drive business growth and enhance user engagement.</p>
+                <p>Our team of passionate developers and designers are committed to excellence, ensuring every project meets the highest standards of quality and innovation.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>100+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Team Members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-section section">
+    <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Web Development</h3>
+                <p>Custom websites and web applications built with the latest technologies and best practices.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Mobile Apps</h3>
+                <p>Native and cross-platform mobile applications designed for both iOS and Android.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Telegram Bots</h3>
+                <p>Smart and efficient Telegram bots for business automation and customer service.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>UI/UX Design</h3>
+                <p>Unique and user-friendly designs that enhance user experience and brand identity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team-section">
+    <div class="container">
+        <h2 class="section-title">Our Team</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="{% static 'team/IMG_3442.PNG' %}" alt="Team Member">
+                    <h4>Mirafzal Bakhodirov</h4>
+                    <p>CEO & Founder</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Team Member">
+                    <h4>Shohjahon</h4>
+                    <p>Lead Developer</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Team Member">
+                    <h4>Shohjahon</h4>
+                    <p>Design Director</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to transform your digital presence?</h2>
+        <a href="#" class="cta-button">Contact Us Today</a>
+    </div>
+</section>
+</div>
+{% endblock %}

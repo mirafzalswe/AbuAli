@@ -1,0 +1,217 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UzbCode - Блог о программировании</title>
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth-buttons.css' %}">
+    <link rel="preconnect" href="https://ui-avatars.com">
+
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="{% url 'article_list' %}" class="nav-link"><div style="font-family:cursive;" class="logo">Abu<span style="color: red;">Ali</span></div></a>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Maqolalar</a>
+                <a href="{% url 'darslar' %}" class="nav-link">Darslar</a>
+                <a href="{% url 'about_us' %}" class="nav-link">Biz haqimizda</a>
+                <a href="#" class="nav-link">Loyihalar</a>
+                <a href="#" class="nav-link">Bog'lanish</a>
+                <a href="{% url 'profile' %}" class="nav-link">Profil</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-text">Темная тема</span>
+                </button>
+                {% if not user.is_authenticated %}
+                <div class="auth-section" id="authSection">
+                    <!-- Состояние: пользователь НЕ авторизован -->
+                    <div class="auth-guest" id="authGuest">
+                        <a href="{% url 'login' %}" class="auth-btn login-btn">
+                            <span class="auth-icon">👤</span>
+                            Войти
+                        </a>
+                        <a href="{% url 'register' %}" class="auth-btn signup-btn">
+                            <span class="auth-icon">✨</span>
+                            Регистрация
+                        </a>
+                    </div>
+                {% else %}
+                <div class="auth-section" id="authSection">
+                    <!-- Состояние: пользователь НЕ авторизован -->
+                    <div class="auth-user" id="authUser">
+                        <a href="{% url 'logout' %}" class="auth-btn logout-btn">
+                            <span class="auth-icon">🚪</span>
+                            <span class="logout-text">Chiqish</span>
+                        </a>
+                    </div>
+
+                    <!-- Состояние: пользователь авторизован -->
+                    <div class="auth-user" id="authUser" style="display: none;">
+                        <div class="user-profile" onclick="toggleUserMenu()">
+                            <div class="user-avatar">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=3b82f6&color=fff&size=40" alt="Avatar" id="userAvatar" loading="lazy">
+                                <div class="user-status"></div>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name" id="userName">John Doe</span>
+                                <span class="user-role" id="userRole">Разработчик</span>
+                            </div>
+                            <div class="dropdown-arrow">▼</div>
+                        </div>
+                   
+                        <!-- Выпадающее меню пользователя -->
+                        <div class="user-menu" id="userMenu">
+                            <div class="user-menu-header">
+                                <div class="user-avatar-large">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=3b82f6&color=fff&size=60" alt="Avatar" loading="lazy">
+                                </div>
+                                <div class="user-details">
+                                    <div class="user-name-large">John Doe</div>
+                                    <div class="user-email">john.doe@example.com</div>
+                                </div>
+                            </div>
+                            <div class="user-menu-divider"></div>
+                            <div class="user-menu-items">
+                                <a href="{% url 'profile' %}" class="user-menu-item">
+                                    <span class="menu-icon">👤</span>
+                                    Мой профиль
+                                </a>
+                                <a href="#" class="user-menu-item">
+                                    <span class="menu-icon">⚙️</span>
+                                    Настройки
+                                </a>
+                                <a href="#" class="user-menu-item">
+                                    <span class="menu-icon">📝</span>
+                                    Мои статьи
+                                </a>
+                                <a href="#" class="user-menu-item">
+                                    <span class="menu-icon">💾</span>
+                                    Сохраненное
+                                </a>
+                                <div class="user-menu-divider"></div>
+                                <a href="#" class="user-menu-item logout-item" onclick="logout()">
+                                    <span class="menu-icon">🚪</span>
+                                    Выйти
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+{% block content %}
+    <!-- Ваш контент здесь -->
+    <div style="height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+        <h1>Демо страница</h1>
+        <p>Нажмите на кнопки авторизации чтобы протестировать функционал</p>
+        <button onclick="simulateLogin()" style="margin: 10px; padding: 10px 20px; border: none; border-radius: 8px; background: #3b82f6; color: white; cursor: pointer;">
+            Симулировать вход
+        </button>
+        <button onclick="simulateLogout()" style="margin: 10px; padding: 10px 20px; border: none; border-radius: 8px; background: #ef4444; color: white; cursor: pointer;">
+            Симулировать выход
+        </button>
+    </div>
+{% endblock %}
+
+    <footer class="footer">
+        <p>&copy; 2024 UzbCode. Все права защищены. Создано с ❤️ для узбекских разработчиков</p>
+    </footer>
+
+    <script>
+        // Существующий функционал темы
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Темная тема';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Светлая тема';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Загрузка сохраненной темы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-text').textContent = 'Светлая тема';
+            }
+        });
+
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('userMenu');
+            userMenu.classList.toggle('active');
+        }
+
+        function logout() {
+            // Здесь будет ваша логика выхода
+            console.log('Logout');
+            document.getElementById('authGuest').style.display = 'flex';
+            document.getElementById('authUser').style.display = 'none';
+            document.getElementById('userMenu').classList.remove('active');
+        }
+
+        // Закрытие модалов по клику вне них (removed as modals are gone)
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const userProfile = document.querySelector('.user-profile');
+            
+            if (!userProfile.contains(event.target) && !userMenu.contains(event.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+
+        // Анимация силы пароля (moved to register.html if needed there, or global if for all forms)
+        document.addEventListener('input', function(event) {
+            if (event.target.type === 'password' && event.target.closest(".auth-page-container")) {
+                const password = event.target.value;
+                const strengthBar = event.target.closest('.form-group').querySelector('.strength-bar');
+                const strengthText = event.target.closest('.form-group').querySelector('.strength-text');
+                
+                let strength = 0;
+                let text = 'Слабый пароль';
+                let color = '#ef4444';
+                
+                if (password.length >= 8) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                if (strength >= 2) {
+                    text = 'Средний пароль';
+                    color = '#f59e0b';
+                }
+                if (strength >= 4) {
+                    text = 'Сильный пароль';
+                    color = '#10b981';
+                }
+                
+                strengthBar.style.width = (strength * 20) + '%';
+                strengthBar.style.backgroundColor = color;
+                strengthText.textContent = text;
+                strengthText.style.color = color;
+            }
+        });
+    </script>
+</body>
+</html>
