@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'taggit',
     "widget_tweaks",
+    'projects',
+    'candidate'
 ]
 
 MIDDLEWARE = [

@@ -9,6 +9,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('us/', include('about_us.urls')),
+    path('projects/', include('projects.urls')),
 ] 
 
 if settings.DEBUG:
