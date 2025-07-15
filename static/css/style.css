@@ -1,4 +1,5 @@
 @import "_variables.css";
+@import "_project_detail.css";
 @import "_base.css";
 @import "_header.css";
 @import "_authentication.css";
@@ -145,7 +146,7 @@
     top: 0;
     z-index: 100;
     backdrop-filter: blur(20px);
-    /* box-shadow: 0 4px 20px var(--shadow); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-md);
 }
 
 .nav {
@@ -218,7 +219,7 @@
 .theme-toggle:hover {
     border-color: var(--accent-primary);
     transform: translateY(-2px);
-    /* box-shadow: 0 8px 25px var(--shadow); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-lg);
 }
 .nav-actions {
     display: flex;
@@ -279,18 +280,18 @@
     color: white;
     border-color: var(--accent-primary);
     transform: translateY(-2px);
-    /* box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-lg);
 }
 
 .signup-btn {
     background: var(--gradient-primary);
     color: white;
-    /* box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-md);
 }
 
 .signup-btn:hover {
     transform: translateY(-2px);
-    /* box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-lg);
 }
 
 .auth-icon {
@@ -320,7 +321,7 @@
 .user-profile:hover {
     border-color: var(--accent-primary);
     transform: translateY(-2px);
-    /* box-shadow: 0 8px 25px var(--shadow); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-lg);
 }
 
 .user-avatar {
@@ -385,7 +386,7 @@
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 20px;
-    /* box-shadow: 0 20px 50px var(--shadow-lg); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-xl);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -1043,12 +1044,7 @@
     outline: none;
 }
 
-.auth-btn:focus,
-.form-input:focus,
-.form-submit:focus,
-.social-btn:focus {
-    /* box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); */ /* Temporarily remove box-shadow */
-}
+
 
 /* ===== СКРОЛЛБАР ===== */
 .modal-content::-webkit-scrollbar {

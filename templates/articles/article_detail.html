@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block extra_js %}
 <script src="{% static 'js/article.js' %}"></script>
@@ -15,7 +16,7 @@
     <div class="article-hero">
         <div class="article-hero-content">
             <div class="article-breadcrumb">
-                <a href="{% url 'article_list' %}" class="breadcrumb-link">Главная</a>
+                <a href="{% url 'article_list' %}" class="breadcrumb-link">{% trans "Home" %}</a>
                 <span class="breadcrumb-separator">→</span>
                 <span class="breadcrumb-current">{{ article.title|truncatechars:30 }}</span>
             </div>
@@ -33,7 +34,7 @@
                     </span>
                     <span class="stat-item">
                         <span class="stat-icon">👁</span>
-                        {{ article.views }} просмотров
+                        {{ article.views }} {% trans "views" %}
                     </span>
                     <button class="like-button {% if user_liked %}liked{% endif %}" 
                             data-article-slug="{{ article.slug }}"
@@ -54,7 +55,7 @@
                 <div class="author-avatar">{{ article.author.get_initials }}</div>
                 <div class="author-details">
                     <span class="author-name">{{ article.author.get_full_name }}</span>
-                    <span class="author-bio">{{ article.author.bio|default:"Автор статей на DevBlog" }}</span>
+                    <span class="author-bio">{{ article.author.bio|default:_("Author at DevBlog") }}</span>
                 </div>
             </div>
         </div>
@@ -120,15 +121,15 @@
         <!-- Sidebar -->
         <aside class="article-sidebar">
             <div class="sidebar-widget">
-                <h3 class="widget-title">Содержание</h3>
+                <h3 class="widget-title">{% trans "Table of Contents" %}</h3>
                 <div class="table-of-contents" id="tableOfContents">
-                    <!-- Будет заполнено JavaScript -->
+                    <!-- To be filled by JavaScript -->
                 </div>
             </div>
             
             {% if related_articles %}
             <div class="sidebar-widget">
-                <h3 class="widget-title">Похожие статьи</h3>
+                <h3 class="widget-title">{% trans "Related articles" %}</h3>
                 <div class="related-articles-sidebar">
                     {% for related in related_articles %}
                     <a href="{{ related.get_absolute_url }}" class="related-article-card">
@@ -157,7 +158,7 @@
         <div class="comments-header">
             <h2 class="comments-title">
                 <span class="comments-icon">💬</span>
-                Комментарии ({{ comments|length }})
+                {% trans "Comments" %} ({{ comments|length }})
             </h2>
         </div>
         
@@ -173,7 +174,7 @@
                         {% else %}
                         <span class="commenter-name">{{ user.username }}</span>
                         {% endif %}
-                        <span class="commenter-label">Оставить комментарий</span>
+                        <span class="commenter-label">{% trans "Leave a comment" %}</span>
                     </div>
                 </div>
                 <div class="comment-form-content">
@@ -181,7 +182,7 @@
                     <div class="comment-form-actions">
                         <button type="submit" class="comment-submit-btn">
                             <span class="btn-icon">💬</span>
-                            Опубликовать
+                            {% trans "Publish" %}
                         </button>
                     </div>
                 </div>
@@ -192,7 +193,7 @@
             <div class="login-prompt-content">
                 <span class="login-prompt-icon">🔐</span>
                 <span class="login-prompt-text">
-                    Пожалуйста, <a href="{% url 'login' %}" class="login-link">войдите</a>, чтобы оставить комментарий
+                    {% trans "Please" %} <a href="{% url 'login' %}" class="login-link">{% trans "log in" %}</a> {% trans "to leave a comment" %}
                 </span>
             </div>
         </div>
@@ -231,8 +232,8 @@
                             <div class="reply-form-content">
                                 {{ comment_form.content }}
                                 <div class="reply-form-actions">
-                                    <button type="submit" class="reply-submit-btn">Отправить</button>
-                                    <button type="button" class="reply-cancel-btn" onclick="hideReplyForm('{{ comment.id }}')">Отмена</button>
+                                    <button type="submit" class="reply-submit-btn">{% trans "Submit" %}</button>
+                                    <button type="button" class="reply-cancel-btn" onclick="hideReplyForm('{{ comment.id }}')">{% trans "Cancel" %}</button>
                                 </div>
                             </div>
                         </form>
@@ -260,8 +261,8 @@
             {% empty %}
             <div class="no-comments">
                 <div class="no-comments-icon">💭</div>
-                <h3>Пока нет комментариев</h3>
-                <p>Будьте первым, кто оставит комментарий к этой статье!</p>
+                <h3>{% trans "No comments yet" %}</h3>
+                <p>{% trans "Be the first to comment on this article!" %}</p>
             </div>
             {% endfor %}
         </div>

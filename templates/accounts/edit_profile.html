@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}Edit Profile - UzbCode{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Edit Profile" %} - UzbCode{% endblock %}
 
 {% block content %}
 <div class="profile-container">
     <div class="profile-card">
         <div class="profile-header">
-            <h2>✨ Edit Profile</h2>
-            <p>Update your information</p>
+            <h2>✨ {% trans "Edit Profile" %}</h2>
+            <p>{% trans "Update your information" %}</p>
         </div>
         
         <form class="profile-form" method="post" enctype="multipart/form-data">
@@ -28,7 +29,7 @@
                 <div class="avatar-upload-wrapper">
                     {{ form.avatar }}
                     <label for="{{ form.avatar.id_for_label }}" class="avatar-upload-label">
-                        Upload Photo
+                        {% trans "Upload Photo" %}
                     </label>
                 </div>
                 
@@ -38,32 +39,32 @@
             <div class="form-grid">
                 <div class="form-field">
                     {{ form.first_name }}
-                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                    <label for="{{ form.first_name.id_for_label }}">{% trans "First Name" %}</label>
                     {% if form.first_name.errors %}<span class="error">{{ form.first_name.errors.0 }}</span>{% endif %}
                 </div>
                 
                 <div class="form-field">
                     {{ form.last_name }}
-                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                    <label for="{{ form.last_name.id_for_label }}">{% trans "Last Name" %}</label>
                     {% if form.last_name.errors %}<span class="error">{{ form.last_name.errors.0 }}</span>{% endif %}
                 </div>
                 
                 <div class="form-field">
                     {{ form.website }}
-                    <label for="{{ form.website.id_for_label }}">Website</label>
+                    <label for="{{ form.website.id_for_label }}">{% trans "Website" %}</label>
                     {% if form.website.errors %}<span class="error">{{ form.website.errors.0 }}</span>{% endif %}
                 </div>
                 
                 <div class="form-field">
                     {{ form.github }}
-                    <label for="{{ form.github.id_for_label }}"> GitHub</label>
+                    <label for="{{ form.github.id_for_label }}">{% trans "GitHub" %}</label>
                     {% if form.github.errors %}<span class="error">{{ form.github.errors.0 }}</span>{% endif %}
                 </div>
             </div>
             
             <button type="submit" class="save-btn">
                 <span>💾</span>
-                Save Changes
+                {% trans "Save Changes" %}
             </button>
         </form>
     </div>

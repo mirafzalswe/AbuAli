@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
-{% block title %}Профиль - UzbCode{% endblock %}
+{% block title %}{% trans "Profile" %} - UzbCode{% endblock %}
 {% block content %}
 
 {% block extra_css %}
@@ -24,17 +25,17 @@
             {% endif %}
             <div class="profile-links">
                 {% if user.github %}
-                    <a href="{{ user.github }}" target="_blank" class="profile-link">GitHub</a>
+                    <a href="{{ user.github }}" target="_blank" class="profile-link">{% trans "GitHub" %}</a>
                 {% endif %}
                 {% if user.website %}
-                    <a href="{{ user.website }}" target="_blank" class="profile-link">Website</a>
+                    <a href="{{ user.website }}" target="_blank" class="profile-link">{% trans "Website" %}</a>
                 {% endif %}
             </div>
-            <a href="{% url 'edit_profile' %}" class="profile-edit-btn">Редактировать профиль</a>
+            <a href="{% url 'edit_profile' %}" class="profile-edit-btn">{% trans "Edit Profile" %}</a>
         </div>
     </div>
     <div class="profile-articles">
-        <h3>Ваши последние статьи</h3>
+        <h3>{% trans "Your recent articles" %}</h3>
         {% if user_articles %}
             <ul class="profile-article-list">
                 {% for article in user_articles %}
@@ -45,7 +46,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p>У вас пока нет опубликованных статей.</p>
+            <p>{% trans "You have no published articles yet." %}</p>
         {% endif %}
     </div>
 </div>

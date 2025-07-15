@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}Список статей{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Article List" %}{% endblock %}
 
 {% block content %}
 <div class="main-container">
     <aside class="sidebar">
         <div class="search-container">
             <form method="get" action="{% url 'article_list' %}">
-                <label class="search-label">Поиск статей</label>
-                <input type="text" name="search" class="search-box" placeholder="Введите ключевые слова..." value="{{ search_query|default:'' }}">
+                <label class="search-label">{% trans "Search articles" %}</label>
+                <input type="text" name="search" class="search-box" placeholder="{% trans "Enter keywords..." %}" value="{{ search_query|default:'' }}">
             </form>
         </div>
 
         <div class="filter-section">
-            <div class="filter-title">Фильтр по тегам</div>
+            <div class="filter-title">{% trans "Filter by tags" %}</div>
             <div class="tag-filters">
-                <a style="text-decoration: none;" href="{% url 'article_list' %}" class="tag-filter {% if not current_tag %}active{% endif %}">Все</a>
+                <a style="text-decoration: none;" href="{% url 'article_list' %}" class="tag-filter {% if not current_tag %}active{% endif %}">{% trans "All" %}</a>
                 {% for tag in popular_tags %}
                 <a style="text-decoration: none;" href="{% url 'article_list' %}?tag={{ tag.name }}" 
                    class="tag-filter {% if current_tag == tag.name %}active{% endif %}">
@@ -27,7 +28,7 @@
 
     <main class="content-area">
         <div class="articles-header">
-            <h1 class="section-title">Последние статьи</h1>
+            <h1 class="section-title">{% trans "Latest articles" %}</h1>
             <div class="sort-options">
                 <form method="get" action="{% url 'article_list' %}" class="sort-form">
                     {% if search_query %}
@@ -37,9 +38,9 @@
                     <input type="hidden" name="tag" value="{{ current_tag }}">
                     {% endif %}
                     <select name="sort" class="sort-select" onchange="this.form.submit()">
-                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>По дате</option>
-                        <option value="popular" {% if sort_by == 'popular' %}selected{% endif %}>По популярности</option>
-                        <option value="most_commented" {% if sort_by == 'most_commented' %}selected{% endif %}>По комментариям</option>
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>{% trans "By date" %}</option>
+                        <option value="popular" {% if sort_by == 'popular' %}selected{% endif %}>{% trans "By popularity" %}</option>
+                        <option value="most_commented" {% if sort_by == 'most_commented' %}selected{% endif %}>{% trans "By comments" %}</option>
                     </select>
                 </form>
             </div>
@@ -65,7 +66,7 @@
                     <h3 class="article-title">{{ article.title }}</h3>
                     <p class="article-excerpt">{{ article.excerpt }}</p>
                     <div class="article-footer">
-                        <a href="{{ article.get_absolute_url }}" class="read-more">Читать далее →</a>
+                        <a href="{{ article.get_absolute_url }}" class="read-more">{% trans "Read more" %} →</a>
                         <div class="article-stats">
                             <span>👁 {{ article.views }}</span>
                             <span>❤️ {{ article.likes_count }}</span>
@@ -76,20 +77,20 @@
             </article>
             {% empty %}
             <div class="no-articles">
-                <p>Статьи не найдены</p>
+                <p>{% trans "No articles found" %}</p>
             </div>
             {% endfor %}
         </div>
 
         <div class="pagination">
             {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">← Предыдущая</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">← {% trans "Previous" %}</a>
             {% endif %}
             
             <span class="current">{{ page_obj.number }}</span>
             
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">Следующая →</a>
+            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">{% trans "Next" %} →</a>
             {% endif %}
         </div>
     </main>
