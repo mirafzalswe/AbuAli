@@ -12,7 +12,7 @@
     background: var(--bg-card);
     border-radius: 20px;
     padding: 2rem;
-    /* box-shadow: 0 10px 40px var(--shadow); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-xl);
     border: 1px solid var(--border);
     height: fit-content;
     position: sticky;
@@ -45,7 +45,7 @@
 .search-box:focus {
     outline: none;
     border-color: var(--accent-primary);
-    /* box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); */ /* Temporarily remove box-shadow */
+    box-shadow: var(--shadow-focus);
     background: var(--bg-card);
 }
 

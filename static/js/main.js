@@ -1,19 +1,49 @@
 // Theme toggle functionality
 function toggleTheme() {
     const body = document.body;
-    const themeIcon = document.getElementById('theme-icon');
-    const themeText = document.getElementById('theme-text');
+    const html = document.documentElement;
+    const isDarkMode = body.getAttribute('data-theme') === 'dark';
+    const newTheme = isDarkMode ? 'light' : 'dark';
     
-    if (body.getAttribute('data-theme') === 'dark') {
-        body.removeAttribute('data-theme');
-        themeIcon.textContent = '🌙';
-        themeText.textContent = 'Темная тема';
-        localStorage.setItem('theme', 'light');
-    } else {
-        body.setAttribute('data-theme', 'dark');
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'Светлая тема';
-        localStorage.setItem('theme', 'dark');
+    // Update both body and html
+    body.setAttribute('data-theme', newTheme);
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcons(newTheme);
+    
+    // Force recalculation of CSS variables
+    document.documentElement.style.setProperty('--force-update', Math.random());
+    
+    // Ensure all elements update properly
+    setTimeout(() => {
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(element => {
+            if (element.style.color || element.style.backgroundColor || element.style.borderColor) {
+                element.style.transition = 'all 0.3s ease';
+            }
+        });
+    }, 10);
+}
+
+// Language dropdown functionality
+function toggleLanguageDropdown() {
+    const dropdown = document.querySelector('.language-dropdown');
+    const menu = document.getElementById('languageMenu');
+    
+    if (dropdown && menu) {
+        dropdown.classList.toggle('active');
+        menu.classList.toggle('active');
+    }
+}
+
+// Close language dropdown when clicking outside
+function closeLanguageDropdown(event) {
+    const dropdown = document.querySelector('.language-dropdown');
+    const menu = document.getElementById('languageMenu');
+    
+    if (dropdown && menu && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+        menu.classList.remove('active');
     }
 }
 
@@ -42,16 +72,51 @@ function logout() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.setAttribute('data-theme', 'dark');
-        const themeIcon = document.getElementById('theme-icon');
-        const themeText = document.getElementById('theme-text');
-        if (themeIcon) themeIcon.textContent = '☀️';
-        if (themeText) themeText.textContent = 'Светлая тема';
+function updateThemeIcons(theme) {
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    if (sunIcon && moonIcon) {
+        if (theme === 'dark') {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            if (themeToggle) {
+                themeToggle.setAttribute('title', 'Switch to light theme');
+            }
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+            if (themeToggle) {
+                themeToggle.setAttribute('title', 'Switch to dark theme');
+            }
+        }
     }
+    
+    // Update all theme-dependent elements
+    const elementsToUpdate = document.querySelectorAll('.language-btn, .nav-link, .auth-btn, .theme-toggle');
+    elementsToUpdate.forEach(element => {
+        // Force style recalculation
+        element.style.display = 'none';
+        element.offsetHeight; // Trigger reflow
+        element.style.display = '';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Load saved theme and set icons
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-theme', savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcons(savedTheme);
+    
+    // Add smooth transitions after page load
+    setTimeout(() => {
+        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+    }, 100);
+    
+    // Close language dropdown on outside click
+    document.addEventListener('click', closeLanguageDropdown);
 
     // Close user menu on outside click
     document.addEventListener('click', function(event) {
@@ -97,8 +162,41 @@ document.addEventListener('DOMContentLoaded', function() {
             strengthBar.style.width = (strength * 20) + '%';
             strengthBar.style.backgroundColor = color;
             strengthText.textContent = text;
-            strengthText.style.color = color;
         }
+    });
+    
+    // Language selector enhancement
+    const languageSelect = document.querySelector('.language-select');
+    if (languageSelect) {
+        languageSelect.addEventListener('focus', function() {
+            this.parentElement.style.borderColor = 'var(--accent-primary)';
+            this.parentElement.style.boxShadow = 'var(--shadow-md)';
+        });
+        
+        languageSelect.addEventListener('blur', function() {
+            this.parentElement.style.borderColor = 'var(--border)';
+            this.parentElement.style.boxShadow = 'none';
+        });
+    }
+    
+    // Add keyboard navigation for theme toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleTheme();
+            }
+        });
+    }
+    
+    // Improve accessibility
+    document.querySelectorAll('.auth-btn, .nav-link, .theme-toggle').forEach(element => {
+        element.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                this.click();
+            }
+        });
     });
 
     // Password toggle

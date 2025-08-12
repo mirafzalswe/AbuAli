@@ -135,9 +135,49 @@ msgid "Contact Us Today"
 msgstr "Свяжитесь с нами сегодня"
 
 #: templates/about_us/darslar.html:4 templates/about_us/darslar.html:13
-#: templates/base.html:26
+#: templates/base.html:28
 msgid "Tutorials"
 msgstr "Уроки"
+
+#: templates/base.html:27
+msgid "Articles"
+msgstr "Статьи"
+
+#: templates/base.html:30
+msgid "Projects"
+msgstr "Проекты"
+
+#: templates/base.html:31
+msgid "Contact"
+msgstr "Контакты"
+
+#: templates/base.html:32
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/base.html:59
+msgid "Войти"
+msgstr "Войти"
+
+#: templates/base.html:72
+msgid "Выйти"
+msgstr "Выйти"
+
+#: templates/base.html:105
+msgid "Мой профиль"
+msgstr "Мой профиль"
+
+#: templates/base.html:109
+msgid "Настройки"
+msgstr "Настройки"
+
+#: templates/base.html:113
+msgid "Мои статьи"
+msgstr "Мои статьи"
+
+#: templates/base.html:117
+msgid "Сохраненное"
+msgstr "Сохраненное"
 
 #: templates/about_us/darslar.html:17
 msgid "Lesson 1: Python Basics"
@@ -148,6 +188,54 @@ msgid ""
 "Basics of the Python programming language and important information for "
 "learning"
 msgstr "Основы языка программирования Python и важная информация для изучения"
+
+#: templates/test_design.html
+msgid "Design Test Page"
+msgstr "Страница тестирования дизайна"
+
+#: templates/test_design.html
+msgid "Test all design elements and theme switching functionality"
+msgstr "Тестирование всех элементов дизайна и функции переключения тем"
+
+#: templates/test_design.html
+msgid "Theme Testing"
+msgstr "Тестирование тем"
+
+#: templates/test_design.html
+msgid "Primary Colors"
+msgstr "Основные цвета"
+
+#: templates/test_design.html
+msgid "Text Colors"
+msgstr "Цвета текста"
+
+#: templates/test_design.html
+msgid "Interactive Elements"
+msgstr "Интерактивные элементы"
+
+#: templates/test_design.html
+msgid "Primary Button"
+msgstr "Основная кнопка"
+
+#: templates/test_design.html
+msgid "Secondary Button"
+msgstr "Вторичная кнопка"
+
+#: templates/about_us/about_us.html:26
+msgid "Innovating the Digital World"
+msgstr "Инновируем Цифровой Мир"
+
+#: templates/about_us/about_us.html:27
+msgid "Empowering businesses with cutting-edge technology solutions"
+msgstr "Создаем передовые технологические решения для развития вашего бизнеса"
+
+#: templates/about_us/about_us.html:29
+msgid "Our Services"
+msgstr "Наши Услуги"
+
+#: templates/about_us/about_us.html:30
+msgid "Our Clients"
+msgstr "Наши Клиенты"
 
 #: templates/about_us/darslar.html:20
 msgid "12 hours"

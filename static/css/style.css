@@ -221,17 +221,89 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+    fill: currentColor;
+    color: var(--text-primary);
+    display: block;
+}
+
+#theme-icon-sun {
+    display: block; /* Показываем по умолчанию для светлой темы */
+}
+
+#theme-icon-moon {
+    display: none; /* Скрываем по умолчанию */
+}
+
 .nav-actions {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
+/* ===== LANGUAGE SELECTOR ===== */
+/* ===== LANGUAGE SELECTOR ===== */
+.language-form {
+    position: relative;
+    display: flex; /* Используем flexbox для выравнивания */
+    align-items: center;
+}
+
+.language-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    color: var(--text-secondary);
+    pointer-events: none; /* Чтобы иконка не мешала клику */
+    transition: color 0.3s ease;
+}
+
+.language-form:hover .language-icon {
+    color: var(--text-primary);
+}
+
+.language-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bg-secondary, #f0f0f0);
+    color: var(--text-primary, #333333);
+    padding: 10px 15px 10px 40px; /* Отступ слева для иконки */
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    padding-right: 30px; /* Место для стрелки */
+}
+
+.language-form select:hover {
+    border-color: var(--accent-primary, #007bff);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.language-form select:focus {
+    border-color: var(--accent-primary, #007bff);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+
 /* ===== БЛОК АВТОРИЗАЦИИ ===== */
 .auth-section {
     display: flex;
     align-items: center;
 }
+
 
 .auth-guest {
     display: flex;
@@ -270,17 +342,18 @@
 }
 
 .login-btn {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: transparent;
+    color: var(--text-secondary);
     border-color: var(--border);
+    padding: 0.6rem 1.2rem; /* Уменьшаем отступы */
 }
 
 .login-btn:hover {
-    background: var(--accent-primary);
-    color: white;
-    border-color: var(--accent-primary);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
 }
 
 .signup-btn {
@@ -295,7 +368,8 @@
 }
 
 .auth-icon {
-    font-size: 1.1rem;
+    width: 20px;
+    height: 20px;
 }
 
 /* ===== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ ===== */

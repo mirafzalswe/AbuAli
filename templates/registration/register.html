@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
-{% block title %}Регистрация - UzbCode{% endblock %}
+{% block title %}{% trans "Registration" %} - UzbCode{% endblock %}
 
 {% block content %}
 <style>
@@ -22,7 +23,7 @@
 <div class="auth-page-container">
     <div class="auth-card">
         <div class="auth-header">
-            <h2 class="auth-title">Akaunt yaratish</h2>
+            <h2 class="auth-title">{% trans "Create an account" %}</h2>
         </div>
         <form class="auth-form" method="post">
             {% csrf_token %}
@@ -44,11 +45,11 @@
             {% endfor %}
             
             <button type="submit" class="form-submit">
-                <span class="submit-text">Создать аккаунт</span>
+                <span class="submit-text">{% trans "Create an account" %}</span>
                 <span class="submit-loader" style="display: none;">⏳</span>
             </button>
             <p class="form-switch">
-                Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+                {% trans "Already have an account?" %} <a href="{% url 'login' %}">{% trans "Login" %}</a>
             </p>
         </form>
     </div>
@@ -85,7 +86,7 @@ function validatePassword() {
     
     const strengthText = document.createElement('small');
     strengthText.className = 'strength-text';
-    strengthText.textContent = 'Слабый пароль';
+    strengthText.textContent = '{% trans "Weak password" %}';
     strengthText.style.color = '#f44336';
     
     if (!document.querySelector('.password-strength')) {
@@ -102,7 +103,7 @@ function validatePassword() {
     strength.style.width = (score * 25) + '%';
     strength.style.backgroundColor = score >= 3 ? '#4CAF50' : '#f44336';
     
-    strengthText.textContent = score >= 3 ? 'Сильный пароль' : 'Слабый пароль';
+    strengthText.textContent = score >= 3 ? '{% trans "Strong password" %}' : '{% trans "Weak password" %}';
     strengthText.style.color = score >= 3 ? '#4CAF50' : '#f44336';
     
     // Password match validation
@@ -111,10 +112,10 @@ function validatePassword() {
         matchError.className = 'password-match-error';
         
         if (pass1 !== pass2) {
-            matchError.textContent = 'Пароли не совпадают';
+            matchError.textContent = '{% trans "Passwords do not match" %}';
             matchError.style.color = '#f44336';
         } else {
-            matchError.textContent = 'Пароли совпадают';
+            matchError.textContent = '{% trans "Passwords match" %}';
             matchError.style.color = '#4CAF50';
         }
         

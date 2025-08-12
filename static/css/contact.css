@@ -62,7 +62,7 @@
 }
 
 .contact-icon.telegram {
-    background: #229ED9;
+    background: var(--accent-primary);
 }
 
 .contact-icon.phone {
