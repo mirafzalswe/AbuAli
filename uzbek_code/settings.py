@@ -25,9 +25,9 @@ TEMPLATES_DIRS = BASE_DIR / 'templates'
 SECRET_KEY = 'django-insecure-ln$5^(*$ffb)$9c%9m@pf&pq!d%7d)(!fcf@^@b*dt7pf4(y&w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Custom user model
 AUTH_USER_MODEL = 'accounts.CustomUser'
