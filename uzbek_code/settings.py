@@ -185,8 +185,7 @@ CACHES = {
     }
 }
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",  # NOT os.path.join(BASE_DIR, "static")
 ]
 
-# Static files storage for production
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
