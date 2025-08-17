@@ -1,0 +1,37 @@
+{
+  "name": "UzbCode Blog",
+  "description": "A Django blog application for Uzbek developers",
+  "image": "heroku/python",
+  "repository": "https://github.com/your-username/uzbek_code",
+  "keywords": ["python", "django", "blog", "uzbek"],
+  "addons": [
+    "heroku-postgresql:mini"
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "Enable debug mode",
+      "value": "False"
+    },
+    "ALLOWED_HOSTS": {
+      "description": "Comma-separated list of allowed hosts",
+      "value": "your-app-name.herokuapp.com,localhost,127.0.0.1"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "python manage.py migrate && python manage.py collectstatic --noinput"
+  }
+}
