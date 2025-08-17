@@ -1,13 +1,16 @@
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIRS = BASE_DIR / 'templates'
 
-SECRET_KEY = 'django-insecure-ln$5^(*$ffb)$9c%9m@pf&pq!d%7d)(!fcf@^@b*dt7pf4(y&w'
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-ln$5^(*$ffb)$9c%9m@pf&pq!d%7d)(!fcf@^@b*dt7pf4(y&w')
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,*').split(',')
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -70,6 +73,11 @@ DATABASES = {
     }
 }
 
+# Production database configuration (PostgreSQL)
+if os.getenv('DATABASE_URL'):
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -97,8 +105,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# DO NOT use ManifestStaticFilesStorage if you're having CSS load issues
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# Use StaticFilesStorage for development to avoid CSS loading issues
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # --- CKEditor ---
 CKEDITOR_UPLOAD_PATH = "uploads/"
